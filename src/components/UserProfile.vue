@@ -18,9 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .user {
-    position: absolute;
-    top: 6rem;
-    left: 6rem;
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

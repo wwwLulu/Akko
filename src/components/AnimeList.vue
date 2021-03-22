@@ -12,32 +12,15 @@
                     <p class="list__type">Type</p>
                 </div>
             </div>
+
             <AnimeListEntry
-                :coverUrl="
-                    `https://res.cloudinary.com/sfp/image/upload/oth/FunimationStoreFront/1346465/English/1346465_English_KeyArt-OfficialVideoImage_ef5f2b49-3e83-e611-80c5-0017a4776c06.jpg`
-                "
-                :title="'Serial Experiments Lain'"
-                :score="10"
-                :progress="'12/13'"
-                :type="'TV'"
-            />
-            <AnimeListEntry
-                :coverUrl="
-                    `https://c.wallhere.com/photos/d0/70/anime_anime_girls_Kantai_Collection_Taihou_KanColle_loli_no_bra_stretching-70423.jpg!d`
-                "
-                :title="'Poopy'"
-                :score="7"
-                :progress="'1/1'"
-                :type="'OVA'"
-            />
-            <AnimeListEntry
-                :coverUrl="
-                    `https://static.zerochan.net/Izumi.Sagiri.600.2089372.jpg`
-                "
-                :title="'Eromanga Sensei'"
-                :score="5"
-                :progress="'7/13'"
-                :type="'TV'"
+                v-for="anime in animeList"
+                :key="anime"
+                :coverUrl="anime.coverUrl"
+                :title="anime.title"
+                :score="anime.score"
+                :progress="`${anime.episodeOn}/${anime.episodes}`"
+                :type="anime.type"
             />
         </section>
     </div>
@@ -49,24 +32,17 @@ import AnimeListEntry from '@/components/AnimeListEntry'
 export default {
     props: {
         type: String,
+        animeList: Array,
     },
     components: {
         AnimeListEntry,
     },
-    data() {
-        return {
-            animeList: [
-                {
-                    title: 'Serial Experiments Lain',
-                    score: 10,
-                    episodes: 24,
-                    episodeOn: 12,
-                    coverUrl: '',
-                    type: '',
-                    status: 'Watching',
-                },
-            ],
-        }
+
+    methods: {
+        sortByTitleAZ() {},
+        sortByTitleZA() {},
+        sortByScoreDesc() {},
+        sortByScoreAsc() {},
     },
 }
 </script>
@@ -77,9 +53,11 @@ export default {
     font-size: 1.4rem;
     border-radius: 0.5rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: 75rem;
+    width: 90vw;
+    max-width: 95rem;
     min-height: 1rem;
     background: white;
+
     * {
         color: rgba(0, 0, 0, 0.6);
     }
@@ -90,6 +68,7 @@ export default {
         margin-bottom: 1rem;
     }
     &__headers {
+        cursor: pointer;
         padding: 1rem 3rem 2rem 3rem;
         width: 100%;
         display: flex;
@@ -99,10 +78,19 @@ export default {
             text-align: center;
         }
         &--left {
-            margin-left: 4rem;
+            margin-left: 3.2rem;
         }
         &--right {
             display: flex;
+        }
+    }
+
+    @media (max-width: 700px) {
+        * {
+            font-size: 0.9rem;
+        }
+        p {
+            width: 5rem;
         }
     }
 }

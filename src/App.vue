@@ -11,8 +11,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 62.5%;
-    @media (max-width: 650px) {
-        font-size: 50%;
+    @media (max-width: 600px) {
+        font-size: 55%;
     }
 }
 * {

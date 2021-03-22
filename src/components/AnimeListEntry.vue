@@ -37,6 +37,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     &:hover {
         // background: slategray;
         background: #8076e5;
@@ -86,7 +87,7 @@ export default {
     &__title {
         font-weight: 100;
         margin-left: 2rem;
-        max-width: 20rem;
+        max-width: 25rem;
         cursor: pointer;
     }
     &__score,
@@ -95,7 +96,18 @@ export default {
         font-weight: 100;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 1200px) {
+        &:hover &__cover-container--hovering {
+            display: none;
+        }
+    }
+    @media (max-width: 700px) {
+        * {
+            font-size: 0.9rem;
+        }
+        p:not(&__title) {
+            width: 5rem;
+        }
     }
 }
 </style>
