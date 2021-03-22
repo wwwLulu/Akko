@@ -59,8 +59,9 @@ export default {
     background: white;
 
     * {
-        color: rgba(0, 0, 0, 0.6);
+        color: var(--color-text-100);
     }
+
     &__heading {
         font-size: 2.2rem;
         font-weight: 100;
@@ -87,7 +88,7 @@ export default {
 
     @media (max-width: 700px) {
         * {
-            font-size: 0.9rem;
+            font-size: 1.3rem;
         }
         p {
             width: 5rem;
