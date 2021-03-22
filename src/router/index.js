@@ -5,6 +5,7 @@ import UserList from '@/views/UserList'
 const routes = [
     {
         path: '/',
+        redirect: '/user/wwwLulu',
         name: 'Home',
         component: Home,
     },
