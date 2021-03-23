@@ -25,7 +25,7 @@
             <p class="anime__title">{{ title }}</p>
         </div>
         <div class="anime__right">
-            <p class="anime__score">{{ score }}</p>
+            <p v-if="score > 0" class="anime__score">{{ score }}</p>
             <p class="anime__progress">
                 {{ progress }}
                 <span
