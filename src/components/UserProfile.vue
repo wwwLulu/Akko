@@ -28,6 +28,11 @@ export default {
     @media (min-width: 1050px) {
         height: 100vh;
     }
+    @media (min-width: 700px) {
+        html {
+            font-size: 50%;
+        }
+    }
     &__avatar-container {
         width: 12.5rem;
         height: 12.5rem;
