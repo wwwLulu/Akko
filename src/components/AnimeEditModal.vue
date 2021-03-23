@@ -61,6 +61,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Lato', sans-serif;
+
     &__cover-container {
         flex-shrink: 0;
         width: 10rem;
@@ -111,7 +113,8 @@ export default {
             text-align: right;
             text-align: center;
             font-size: 1.4rem;
-            font-weight: 200;
+            font-weight: 300;
+            font-family: 'Lato', sans-serif;
         }
     }
 }

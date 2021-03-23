@@ -46,7 +46,6 @@ html {
     margin: 0;
 }
 body {
-    font-family: Meiryo, sans-serif, monospace;
     background: #eaeaea;
     max-width: 1925px;
     margin: 0 auto;
