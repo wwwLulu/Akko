@@ -24,7 +24,6 @@ export default {
 
 <style lang="scss" scoped>
 .user {
-    margin: 2rem 0;
     &__favorites {
         width: 30rem;
         padding: 1rem;

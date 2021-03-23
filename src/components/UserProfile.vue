@@ -13,14 +13,15 @@ export default {
         userImgUrl: String,
         username: String,
     },
+    components: {},
 }
 </script>
 
 <style lang="scss" scoped>
 .user {
-    // background: blue;
     width: 100%;
     height: 100%;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
