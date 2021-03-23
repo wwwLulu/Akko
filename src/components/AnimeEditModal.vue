@@ -1,6 +1,6 @@
 <template>
     <div class="modal">
-        <div @click="$emit('closeModal')" class="modal__backdrop"></div>
+        <div @click="saveAndClose" class="modal__backdrop"></div>
         <div class="modal__info">
             <div class="modal__cover-container">
                 <img :src="coverUrl" alt="" class="modal__cover" />
@@ -26,6 +26,7 @@
                     />
                     <span> / {{ episodes }}</span>
                 </div>
+                <button @click="saveAndClose" class="modal__save">Save</button>
             </div>
         </div>
     </div>
@@ -52,6 +53,11 @@ export default {
             )
         },
     },
+    methods: {
+        saveAndClose() {
+            this.$emit('closeModal')
+        },
+    },
 }
 </script>
 
@@ -68,7 +74,18 @@ export default {
     justify-content: center;
     align-items: center;
     font-family: 'Lato', sans-serif;
-
+    &__save {
+        cursor: pointer;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.8rem 1.2rem;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
     &__cover-container {
         flex-shrink: 0;
         width: 10rem;
@@ -93,12 +110,10 @@ export default {
         bottom: 0;
     }
     &__edit {
+        position: relative;
         font-weight: 300;
-        padding: 0 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        * {
+        margin-left: 1rem;
+        *:not(:last-child) {
             margin-bottom: 1rem;
         }
     }

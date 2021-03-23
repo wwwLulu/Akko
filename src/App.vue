@@ -2,35 +2,11 @@
     <router-view />
 </template>
 
-<script>
-// import { onBeforeMount } from 'vue'
-// import { useRouter, useRoute } from 'vue-router'
-// import firebase from 'firebase'
-
-// export default {
-//     data() {
-//         return {}
-//     },
-//     created() {
-//         firebase.auto().onAuthStateChanged((user) => {
-//             if (!user) {
-//                 useRouter().replace('/login')
-//             } else if (
-//                 useRoute().path == '/login' ||
-//                 useRoute().path == '/register'
-//             ) {
-//                 useRouter().replace('/')
-//             }
-//         })
-//     },
-// }
-</script>
-
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 
 :root {
-    --color-primary: #58abda;
+    --color-primary: #6a62c2;
     --color-text-100: rgba(0, 0, 0, 0.6);
     --color-text-200: rgba(0, 0, 0, 0.6);
 }

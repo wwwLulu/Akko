@@ -26,7 +26,15 @@
         </div>
         <div class="anime__right">
             <p class="anime__score">{{ score }}</p>
-            <p class="anime__progress">{{ progress }}</p>
+            <p class="anime__progress">
+                {{ progress }}
+                <span
+                    v-if="currentEpisode != episodes"
+                    class="anime__progress--add"
+                >
+                    &#43;</span
+                >
+            </p>
             <p class="anime__type">{{ type }}</p>
         </div>
     </div>
@@ -51,6 +59,17 @@ export default {
             editMode: false,
         }
     },
+    computed: {
+        currentEpisode() {
+            return this.progress.slice(0, this.progress.split('').indexOf('/'))
+        },
+        episodes() {
+            return this.progress.slice(
+                this.progress.split('').indexOf('/') + 1,
+                this.progress.length
+            )
+        },
+    },
 }
 </script>
 
@@ -64,7 +83,7 @@ export default {
     align-items: center;
 
     &:hover {
-        background: #8076e5;
+        background: var(--color-primary);
         color: white;
     }
 
@@ -118,6 +137,10 @@ export default {
         width: 11rem;
         height: 15rem;
     }
+    &:hover &__progress--add {
+        display: inline;
+        cursor: pointer;
+    }
     &__title {
         font-weight: 300;
         margin-left: 2rem;
@@ -129,7 +152,11 @@ export default {
     &__type {
         font-weight: 300;
     }
-
+    &__progress {
+        &--add {
+            display: none;
+        }
+    }
     @media (max-width: 1200px) {
         &:hover &__cover-container--hovering {
             display: none;

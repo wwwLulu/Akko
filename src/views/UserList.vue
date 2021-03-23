@@ -3,30 +3,26 @@
         :username="'wwwLulu'"
         :userImgUrl="'https://avatarfiles.alphacoders.com/262/262565.jpg'"
     />
-    <div class="lists">
+    <section class="lists">
         <AnimeList
+            v-if="watchingList.length != 0"
             :type="'Watching'"
-            :animeList="
-                animeList.filter(
-                    (anime) =>
-                        anime.episodes > anime.episodeOn && anime.episodeOn > 1
-                )
-            "
+            :animeList="watchingList"
             @sortUserList="sortUserList"
         />
         <AnimeList
+            v-if="completedList.length != 0"
             :type="'Completed'"
-            :animeList="
-                animeList.filter((anime) => anime.episodes <= anime.episodeOn)
-            "
+            :animeList="completedList"
             @sortUserList="sortUserList"
         />
         <AnimeList
+            v-if="planToWatchList.length != 0"
             :type="'Plan To Watch'"
-            :animeList="animeList.filter((anime) => anime.episodeOn <= 1)"
+            :animeList="planToWatchList"
             @sortUserList="sortUserList"
         />
-    </div>
+    </section>
 </template>
 
 <script>
@@ -111,6 +107,22 @@ export default {
     mounted() {
         this.sortUserList(this.sortMethod)
     },
+    computed: {
+        watchingList() {
+            return this.animeList.filter(
+                (anime) =>
+                    anime.episodes > anime.episodeOn && anime.episodeOn > 1
+            )
+        },
+        completedList() {
+            return this.animeList.filter(
+                (anime) => anime.episodes <= anime.episodeOn
+            )
+        },
+        planToWatchList() {
+            return this.animeList.filter((anime) => anime.episodeOn <= 1)
+        },
+    },
     methods: {
         sortUserList(method) {
             if (method == 'score') {
@@ -163,7 +175,7 @@ export default {
         left: -20px;
         right: -20px;
         bottom: -20px;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(255, 255, 255, 0.5);
     }
 }
 </style>
