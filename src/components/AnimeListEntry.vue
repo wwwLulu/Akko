@@ -164,7 +164,7 @@ export default {
     }
     @media (max-width: 700px) {
         * {
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
         p:not(&__title) {
             width: 5rem;
