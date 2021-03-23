@@ -8,7 +8,13 @@
             <div class="modal__edit">
                 <div>
                     <label for="score">Score: </label>
-                    <input type="number" max="10" min="0" :value="score" />
+                    <input
+                        type="number"
+                        max="10"
+                        step="0.5"
+                        min="0"
+                        :value="score"
+                    />
                 </div>
                 <div>
                     <label for="progress">Progress: </label>
