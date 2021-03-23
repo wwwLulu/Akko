@@ -3,7 +3,7 @@
         :username="'wwwLulu'"
         :userImgUrl="'https://avatarfiles.alphacoders.com/262/262565.jpg'"
     />
-    <div class="container">
+    <div class="lists">
         <AnimeList
             :type="'Watching'"
             :animeList="
@@ -12,16 +12,19 @@
                         anime.episodes > anime.episodeOn && anime.episodeOn > 1
                 )
             "
+            @sortUserList="sortUserList"
         />
         <AnimeList
             :type="'Completed'"
             :animeList="
                 animeList.filter((anime) => anime.episodes <= anime.episodeOn)
             "
+            @sortUserList="sortUserList"
         />
         <AnimeList
             :type="'Plan To Watch'"
             :animeList="animeList.filter((anime) => anime.episodeOn <= 1)"
+            @sortUserList="sortUserList"
         />
     </div>
 </template>
@@ -37,6 +40,7 @@ export default {
     },
     data() {
         return {
+            sortMethod: 'score',
             animeList: [
                 {
                     title: 'Mushoku Tensei: Isekai Ittara Honki Dasu',
@@ -85,6 +89,7 @@ export default {
                 },
                 {
                     title: 'Katanagatari',
+                    score: 0,
                     episodes: 11,
                     episodeOn: 1,
                     coverUrl:
@@ -95,28 +100,34 @@ export default {
         }
     },
     mounted() {
-        // this.sortByTitleAZ()
-        this.sortByScoreAsc()
+        this.sortUserList(this.sortMethod)
     },
     methods: {
+        sortUserList(method) {
+            if (method == 'score') {
+                this.sortByScoreDesc()
+            } else {
+                this.sortByTitleAZ()
+            }
+        },
         sortByTitleAZ() {
-            this.animeList = this.animeList.sort((a, b) => a.title > b.title)
+            this.animeList.sort((a, b) => a.title > b.title)
         },
         sortByTitleZA() {
-            this.animeList = this.animeList.sort((a, b) => a.title < b.title)
-        },
-        sortByScoreDesc() {
-            this.animeList = this.animeList.sort((a, b) => a.score - b.score)
+            this.animeList.sort((a, b) => a.title < b.title)
         },
         sortByScoreAsc() {
-            this.animeList = this.animeList.sort((a, b) => b.score - a.score)
+            this.animeList.sort((a, b) => a.score - b.score)
+        },
+        sortByScoreDesc() {
+            this.animeList.sort((a, b) => b.score - a.score)
         },
     },
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
+.lists {
     width: 100vw;
     display: flex;
     flex-direction: column;

@@ -4,10 +4,20 @@
         <section class="list">
             <div class="list__headers">
                 <div class="list__headers--left">
-                    <p class="list__title">Title</p>
+                    <p
+                        @click="$emit('sortUserList', 'title')"
+                        class="list__title"
+                    >
+                        Title
+                    </p>
                 </div>
                 <div class="list__headers--right">
-                    <p class="list__score">Score</p>
+                    <p
+                        @click="$emit('sortUserList', 'score')"
+                        class="list__score"
+                    >
+                        Score
+                    </p>
                     <p class="list__progress">Progress</p>
                     <p class="list__type">Type</p>
                 </div>
@@ -34,6 +44,7 @@ export default {
         type: String,
         animeList: Array,
     },
+    emits: ['sortUserList'],
     components: {
         AnimeListEntry,
     },
@@ -62,7 +73,6 @@ export default {
         margin-bottom: 1rem;
     }
     &__headers {
-        cursor: pointer;
         padding: 1rem 3rem 2rem 3rem;
         width: 100%;
         display: flex;
@@ -78,7 +88,11 @@ export default {
             display: flex;
         }
     }
-
+    &__title,
+    &__score {
+        cursor: pointer;
+        text-decoration: underline;
+    }
     @media (max-width: 700px) {
         * {
             font-size: 1rem;

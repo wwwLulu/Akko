@@ -1,8 +1,23 @@
 <template>
+    <teleport to="#app">
+        <AnimeEditModal
+            v-if="editMode"
+            @closeModal="editMode = false"
+            :coverUrl="coverUrl"
+            :title="title"
+            :score="score"
+            :progress="progress"
+            :type="type"
+        />
+    </teleport>
     <div class="anime">
         <div class="anime__left">
             <div class="anime__cover-container">
                 <img :src="coverUrl" alt="cover" class="anime__cover" />
+                <i
+                    @click="editMode = true"
+                    class="fas fa-ellipsis-h anime__edit"
+                ></i>
             </div>
             <div class="anime__cover-container--hovering">
                 <img :src="coverUrl" alt="cover" class="anime__cover--big" />
@@ -18,6 +33,8 @@
 </template>
 
 <script>
+import AnimeEditModal from '@/components/AnimeEditModal'
+
 export default {
     props: {
         coverUrl: String,
@@ -25,6 +42,14 @@ export default {
         score: Number,
         progress: String,
         type: String,
+    },
+    components: {
+        AnimeEditModal,
+    },
+    data() {
+        return {
+            editMode: false,
+        }
     },
 }
 </script>
@@ -39,7 +64,6 @@ export default {
     align-items: center;
 
     &:hover {
-        // background: slategray;
         background: #8076e5;
         color: white;
     }
@@ -57,11 +81,17 @@ export default {
     &__right:not(:first-child) {
         margin-left: 2rem;
     }
-
+    &__edit {
+        cursor: pointer;
+        display: none;
+    }
     &__cover-container {
         flex-shrink: 0;
         width: 4rem;
         height: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     &__cover-container--hovering {
         display: none;
@@ -76,6 +106,9 @@ export default {
     }
     &:hover &__cover {
         display: none;
+    }
+    &:hover &__edit {
+        display: block;
     }
     &:hover &__cover-container--hovering {
         display: block;
