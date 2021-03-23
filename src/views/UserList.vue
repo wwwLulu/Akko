@@ -96,6 +96,15 @@ export default {
                         'https://cdn.myanimelist.net/images/anime/2/50023.jpg',
                     type: 'TV',
                 },
+                {
+                    title: 'Little Witch Academia',
+                    score: 7.5,
+                    episodes: 24,
+                    episodeOn: 11,
+                    coverUrl:
+                        'https://cdn.myanimelist.net/images/anime/13/83934.jpg',
+                    type: 'TV',
+                },
             ],
         }
     },
