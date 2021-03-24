@@ -28,6 +28,23 @@
                     />
                     <span> / {{ episodes }}</span>
                 </div>
+                <div>
+                    <label for="checkbox">Completed: </label>
+                    <input
+                        @click="completed"
+                        v-if="episodes != currentEpisode"
+                        type="checkbox"
+                        name="checkbox"
+                        ref="completed"
+                    />
+                    <input
+                        v-else
+                        type="checkbox"
+                        name="checkbox"
+                        ref="completed"
+                        checked
+                    />
+                </div>
                 <button @click="saveAndClose" class="modal__save">Save</button>
             </div>
         </div>
@@ -56,6 +73,12 @@ export default {
         },
     },
     methods: {
+        completed() {
+            this.$store.commit('updateProgress', {
+                title: this.title,
+                episode: this.episodes,
+            })
+        },
         saveAndClose() {
             this.$store.commit('updateProgress', {
                 title: this.title,
@@ -65,7 +88,6 @@ export default {
                 title: this.title,
                 newScore: this.$refs.score.value,
             })
-            this.$emit('closeModal')
         },
     },
 }

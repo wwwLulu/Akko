@@ -40,9 +40,6 @@ export default {
         this.$store.commit('sortUserList', this.sortMethod)
     },
     computed: {
-        animeList() {
-            return this.$store.state.animeList
-        },
         watchingList() {
             return this.$store.getters.watchingList
         },
