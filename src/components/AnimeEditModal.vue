@@ -14,6 +14,7 @@
                         step="0.5"
                         min="0"
                         :value="score"
+                        ref="score"
                     />
                 </div>
                 <div>
@@ -23,6 +24,7 @@
                         :max="episodes"
                         min="1"
                         :value="currentEpisode"
+                        ref="progress"
                     />
                     <span> / {{ episodes }}</span>
                 </div>
@@ -55,6 +57,14 @@ export default {
     },
     methods: {
         saveAndClose() {
+            this.$store.commit('updateProgress', {
+                title: this.title,
+                episode: this.$refs.progress.value,
+            })
+            this.$store.commit('updateScore', {
+                title: this.title,
+                newScore: this.$refs.score.value,
+            })
             this.$emit('closeModal')
         },
     },

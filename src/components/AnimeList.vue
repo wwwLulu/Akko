@@ -5,7 +5,7 @@
             <div class="list__headers">
                 <div class="list__headers--left">
                     <p
-                        @click="$emit('sortUserList', 'title')"
+                        @click="$store.commit('sortUserList', 'title')"
                         class="list__title"
                     >
                         Title
@@ -13,7 +13,7 @@
                 </div>
                 <div class="list__headers--right">
                     <p
-                        @click="$emit('sortUserList', 'score')"
+                        @click="$store.commit('sortUserList', 'score')"
                         class="list__score"
                     >
                         Score

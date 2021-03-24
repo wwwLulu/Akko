@@ -29,6 +29,7 @@
             <p class="anime__progress">
                 {{ progress }}
                 <span
+                    @click="incrementEpisode"
                     v-if="currentEpisode != episodes"
                     class="anime__progress--add"
                 >
@@ -68,6 +69,11 @@ export default {
                 this.progress.split('').indexOf('/') + 1,
                 this.progress.length
             )
+        },
+    },
+    methods: {
+        incrementEpisode() {
+            this.$store.commit('incrementEpisode', this.title)
         },
     },
 }
