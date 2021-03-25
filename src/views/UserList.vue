@@ -36,6 +36,9 @@ export default {
         AnimeList,
         UserProfile,
     },
+    created() {
+        this.$store.dispatch('getUserList')
+    },
     mounted() {
         this.$store.commit('sortUserList', this.sortMethod)
     },

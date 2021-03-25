@@ -13,6 +13,7 @@ const routes = [
         path: '/user/:username',
         name: 'UserList',
         component: UserList,
+        props: true,
     },
 ]
 

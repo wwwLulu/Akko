@@ -4,18 +4,12 @@
         <section class="list">
             <div class="list__headers">
                 <div class="list__headers--left">
-                    <p
-                        @click="$store.commit('sortUserList', 'title')"
-                        class="list__title"
-                    >
+                    <p @click="sortUserList('title')" class="list__title">
                         Title
                     </p>
                 </div>
                 <div class="list__headers--right">
-                    <p
-                        @click="$store.commit('sortUserList', 'score')"
-                        class="list__score"
-                    >
+                    <p @click="sortUserList('score')" class="list__score">
                         Score
                     </p>
                     <p class="list__progress">Progress</p>
@@ -47,6 +41,12 @@ export default {
     emits: ['sortUserList'],
     components: {
         AnimeListEntry,
+    },
+    methods: {
+        sortUserList(type) {
+            this.$store.commit('sortUserList', type)
+            this.$store.dispatch('updateUserList')
+        },
     },
 }
 </script>

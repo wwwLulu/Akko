@@ -96,6 +96,7 @@ export default {
                 title: this.title,
                 newScore: this.$refs.score.value,
             })
+            this.$store.dispatch('updateUserList')
             this.$emit('closeModal')
         },
     },
@@ -154,8 +155,6 @@ export default {
         position: relative;
         font-weight: 300;
         margin-left: 1rem;
-        // *:not(:last-child) {
-        // }
     }
     &__info {
         padding: 1rem;

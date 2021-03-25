@@ -74,6 +74,7 @@ export default {
     methods: {
         incrementEpisode() {
             this.$store.commit('incrementEpisode', this.title)
+            this.$store.dispatch('updateUserList')
         },
     },
 }
