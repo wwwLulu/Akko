@@ -2,10 +2,8 @@
     <div class="row">
         <UserProfile
             class="col-4"
-            :username="'wwwLulu'"
-            :userImgUrl="
-                'https://avatars.githubusercontent.com/u/77130682?s=460&u=091475bd4b0999c440f2f381f38dc307b79a021a&v=4'
-            "
+            :username="$store.getters.userName"
+            :userImgUrl="$store.getters.userAvatar"
         />
         <section class="lists col-8">
             <AnimeList

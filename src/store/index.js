@@ -25,6 +25,27 @@ const store = createStore({
             return state.userName
         },
     },
+    actions: {
+        async updateUserInfo(context) {
+            const userName = context.getters.userName
+            const userAvatar = context.getters.userAvatar
+            const userId = context.getters.userId
+            const res = await fetch(
+                `https://coach-app-c4584-default-rtdb.firebaseio.com/userInfo/${userId}.json`,
+                {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        userName,
+                        userAvatar,
+                        userId,
+                    }),
+                }
+            )
+            if (!res.ok) {
+                console.log('Error inserting data into DB')
+            }
+        },
+    },
 })
 
 export default store
