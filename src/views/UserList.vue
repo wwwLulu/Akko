@@ -2,8 +2,8 @@
     <div class="row">
         <UserProfile
             class="col-4"
-            :username="$store.getters.userName"
-            :userImgUrl="$store.getters.userAvatar"
+            :username="$store.state.userListName"
+            :userImgUrl="$store.state.userListAvatar"
         />
         <section class="lists col-8">
             <AnimeList
@@ -37,12 +37,9 @@ export default {
         AnimeList,
         UserProfile,
     },
-    async created() {
-        // this.$store.dispatch('updateUserInfo')
-        await this.$store.dispatch('getUserInfo')
-        await this.$store.dispatch('getUserList')
-    },
-    mounted() {
+    async mounted() {
+        await this.$store.dispatch('getUserInfo', this.username)
+        await this.$store.dispatch('getUserList', this.username)
         this.$store.commit('sortUserList', this.sortMethod)
     },
     computed: {

@@ -16,12 +16,12 @@
         </button>
 
         <div class="login" v-if="loginMode">
-            <form @submit.prevent="login" class="form">
+            <form @submit.prevent="submitForm" class="form">
                 <input
                     class="form__input"
                     type="text"
-                    v-model="username"
-                    placeholder="Username"
+                    v-model="email"
+                    placeholder="Email"
                 />
                 <input
                     class="form__input"
@@ -34,7 +34,7 @@
             </form>
         </div>
         <div class="signup" v-if="!loginMode">
-            <form class="form" @submit.prevent="signup">
+            <form class="form" @submit.prevent="submitForm">
                 <input
                     class="form__input"
                     type="email"
@@ -49,12 +49,18 @@
                     v-model="password"
                     placeholder="Password"
                 />
-                <input
+                <!-- <input
                     class="form__input"
                     type="password"
                     name="confirmPassword"
                     v-model="confirmPassword"
                     placeholder="Confirm Password"
+                /> -->
+                <input
+                    type="text"
+                    class="form__input"
+                    v-model="userName"
+                    placeholder="Username"
                 />
                 <button class="form__submit">Submit</button>
             </form>
@@ -70,19 +76,32 @@ export default {
             loginMode: true,
             email: '',
             password: '',
-            username: '',
             confirmPassword: '',
+            userName: '',
         }
     },
     methods: {
-        signup() {
+        async submitForm() {
             if (
                 this.email === '' ||
                 !this.email.includes('@') ||
                 this.password.length < 6
             ) {
                 this.isValid = false
+                alert('invalid, try again')
                 return
+            }
+            if (this.loginMode) {
+                await this.$store.dispatch('login', {
+                    email: this.email,
+                    password: this.password,
+                })
+            } else {
+                await this.$store.dispatch('signUp', {
+                    email: this.email,
+                    password: this.password,
+                    username: this.userName,
+                })
             }
         },
     },

@@ -2,10 +2,18 @@ export default {
     // namespaced: true,
     state() {
         return {
+            userListAvatar: null,
+            userListName: null,
             animeList: [],
         }
     },
     getters: {
+        userListAvatar(state) {
+            return state.userListAvatar
+        },
+        userListName(state) {
+            return state.userListName
+        },
         watchingList(state) {
             return state.animeList.filter(
                 (anime) =>
@@ -27,6 +35,12 @@ export default {
     mutations: {
         fetchUserList(state, userList) {
             state.animeList = userList
+        },
+        UpdateUserListName(state, username) {
+            state.userListName = username
+        },
+        UpdateUserListAvatar(state, avatar) {
+            state.userListAvatar = avatar
         },
         updateScore(state, { title, newScore }) {
             state.animeList.forEach((anime) => {
@@ -70,12 +84,29 @@ export default {
         },
     },
     actions: {
-        async getUserList(context) {
-            const userName = context.rootGetters.userName
+        async getUserList(context, userName = context.rootGetters.userName) {
+            if (context.state.animeList.length == 0) {
+                context.state.animeList = [
+                    {
+                        title: 'Mushoku Tensei: Isekai Ittara Honki Dasu',
+                        score: 8,
+                        episodes: 24,
+                        episodeOn: 12,
+                        coverUrl:
+                            'https://cdn.myanimelist.net/images/anime/1068/111129.jpg',
+                        type: 'TV',
+                    },
+                ]
+                await context.dispatch('updateUserList')
+            }
+
             const res = await fetch(
                 `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`
             )
             const userListObj = await res.json()
+            if (!!userListObj == false) {
+                await context.dispatch('updateUserList')
+            }
             const userList = []
 
             for (const key in userListObj) {
@@ -92,7 +123,7 @@ export default {
             context.commit('fetchUserList', userList)
         },
         async updateUserList(context) {
-            const userName = context.rootGetters.userName
+            const userName = context.getters.userName
             const response = await fetch(
                 `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`,
                 {
