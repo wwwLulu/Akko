@@ -3,11 +3,18 @@
         <router-link class="nav__link" to="/">
             Home
         </router-link>
-        <router-link class="nav__link" :to="`/user/${$store.getters.userName}`">
+        <router-link
+            v-if="!!$store.state.token"
+            class="nav__link"
+            :to="`/user/${$store.getters.userName}`"
+        >
             My List
         </router-link>
-        <button @click="logout" class="nav__logout">
+        <button v-if="!!$store.state.token" @click="logout" class="nav__logout">
             Logout
+        </button>
+        <button @click="$router.push('/auth')" v-else class="nav__logout">
+            Log in
         </button>
     </nav>
 </template>
@@ -16,7 +23,8 @@
 export default {
     methods: {
         logout() {
-            // this.$store.dispatch('logout')
+            this.$store.dispatch('logout')
+            this.$router.push('/')
         },
     },
 }

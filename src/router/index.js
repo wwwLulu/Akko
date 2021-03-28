@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import UserList from '@/views/UserList'
+import Auth from '@/views/Auth'
 
 const routes = [
     {
@@ -8,6 +9,11 @@ const routes = [
         // redirect: '/user/wwwLulu',
         name: 'Home',
         component: Home,
+    },
+    {
+        path: '/auth',
+        name: 'Auth',
+        component: Auth,
     },
     {
         path: '/user/:username',

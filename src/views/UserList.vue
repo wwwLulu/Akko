@@ -6,6 +6,15 @@
             :userImgUrl="$store.state.userListAvatar"
         />
         <section class="lists col-8">
+            <h2
+                v-if="
+                    watchingList.length == 0 &&
+                        completedList.length == 0 &&
+                        planToWatchList.length == 0
+                "
+            >
+                List is empty
+            </h2>
             <AnimeList
                 v-if="watchingList.length != 0"
                 :type="'Watching'"
@@ -57,6 +66,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+    margin-top: 5rem;
+    font-size: 2rem;
+}
 .row {
     display: flex;
     flex-wrap: wrap;

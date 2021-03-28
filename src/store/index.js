@@ -159,6 +159,19 @@ const store = createStore({
                 }
             }
         },
+        async logout(context) {
+            context.commit('setUser', {
+                token: null,
+                userId: null,
+                tokenExpiration: null,
+                username: null,
+            })
+            localStorage.removeItem('token')
+            localStorage.removeItem('userId')
+            localStorage.removeItem('tokenExpiration')
+            localStorage.removeItem('userName')
+            localStorage.removeItem('userAvatar')
+        },
     },
     mutations: {
         setUser(state, payload) {

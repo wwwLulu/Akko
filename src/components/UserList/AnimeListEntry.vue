@@ -73,6 +73,9 @@ export default {
     },
     methods: {
         incrementEpisode() {
+            if (this.$route.params.username != this.$store.getters.userName) {
+                return
+            }
             this.$store.commit('incrementEpisode', this.title)
             this.$store.dispatch('updateUserList')
         },

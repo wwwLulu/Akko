@@ -87,6 +87,10 @@ export default {
             this.completed = !this.completed
         },
         saveAndClose() {
+            if (this.$route.params.username != this.$store.getters.userName) {
+                this.$emit('closeModal')
+                return
+            }
             this.$store.commit('updateProgress', {
                 title: this.title,
                 episode: this.completed

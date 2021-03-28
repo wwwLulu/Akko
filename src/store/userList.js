@@ -85,8 +85,28 @@ export default {
     },
     actions: {
         async getUserList(context, userName = context.rootGetters.userName) {
-            if (context.state.animeList.length == 0) {
-                context.state.animeList = [
+            const res = await fetch(
+                `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`
+            )
+            const userListObj = await res.json()
+            if (!!userListObj == false) {
+                await context.dispatch('updateUserList')
+            }
+            let userList = []
+
+            for (const key in userListObj) {
+                const animeEntry = {
+                    title: userListObj[key].title,
+                    score: userListObj[key].score,
+                    episodes: userListObj[key].episodes,
+                    episodeOn: userListObj[key].episodeOn,
+                    coverUrl: userListObj[key].coverUrl,
+                    type: userListObj[key].type,
+                }
+                userList.push(animeEntry)
+            }
+            if (userList.length == 0) {
+                userList = [
                     {
                         title: 'Mushoku Tensei: Isekai Ittara Honki Dasu',
                         score: 8,
@@ -105,79 +125,14 @@ export default {
                             'https://cdn.myanimelist.net/images/anime/6/86733.webp',
                         type: 'TV',
                     },
-                    {
-                        title: 'Ore no Imouto ga Konnani Kawaii Wake ga Nai',
-                        score: 8,
-                        episodes: 12,
-                        episodeOn: 12,
-                        coverUrl:
-                            'https://cdn.myanimelist.net/images/anime/8/24875.jpg',
-                        type: 'TV',
-                    },
-                    {
-                        title: 'Anohana.',
-                        score: 9,
-                        episodes: 11,
-                        episodeOn: 11,
-                        coverUrl:
-                            'https://cdn.myanimelist.net/images/anime/5/79697.jpg',
-                        type: 'TV',
-                    },
-                    {
-                        title: 'Barakamon',
-                        score: 8.5,
-                        episodes: 11,
-                        episodeOn: 11,
-                        coverUrl:
-                            'https://cdn.myanimelist.net/images/anime/12/65427.jpg',
-                        type: 'TV',
-                    },
-                    {
-                        title: 'Katanagatari',
-                        score: 0,
-                        episodes: 11,
-                        episodeOn: 1,
-                        coverUrl:
-                            'https://cdn.myanimelist.net/images/anime/2/50023.jpg',
-                        type: 'TV',
-                    },
-                    {
-                        title: 'Little Witch Academia',
-                        score: 7.5,
-                        episodes: 24,
-                        episodeOn: 11,
-                        coverUrl:
-                            'https://cdn.myanimelist.net/images/anime/13/83934.jpg',
-                        type: 'TV',
-                    },
                 ]
                 await context.dispatch('updateUserList')
-            }
-
-            const res = await fetch(
-                `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`
-            )
-            const userListObj = await res.json()
-            if (!!userListObj == false) {
-                await context.dispatch('updateUserList')
-            }
-            const userList = []
-
-            for (const key in userListObj) {
-                const animeEntry = {
-                    title: userListObj[key].title,
-                    score: userListObj[key].score,
-                    episodes: userListObj[key].episodes,
-                    episodeOn: userListObj[key].episodeOn,
-                    coverUrl: userListObj[key].coverUrl,
-                    type: userListObj[key].type,
-                }
-                userList.push(animeEntry)
             }
             context.commit('fetchUserList', userList)
         },
         async updateUserList(context) {
             const userName = context.getters.userName
+
             const response = await fetch(
                 `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`,
                 {
