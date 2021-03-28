@@ -26,9 +26,7 @@ export default {
             )
         },
         planToWatchList(state) {
-            return state.animeList.filter(
-                (anime) => anime.episodeOn <= 1 && anime.episodes != 1
-            )
+            return state.animeList.filter((anime) => anime.episodeOn <= 0)
         },
         animeList(state) {
             return state.animeList
