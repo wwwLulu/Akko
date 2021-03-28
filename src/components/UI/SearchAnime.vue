@@ -1,4 +1,8 @@
 <template>
+    <TheAlert
+        v-if="addedToListEvent"
+        :message="`The anime ${animeSelected} has been added to your list`"
+    />
     <div v-if="!!$store.state.token" class="search">
         <input
             class="search__input"
@@ -7,10 +11,11 @@
             v-model="search"
         />
         <div v-if="results.length != 0" class="search__results">
-            <p>Click to add</p>
+            <p>Click to add to list</p>
             <br />
-            <ul>
-                <li
+            <div>
+                <div
+                    class="search__result"
                     @click="addEntry(result.title)"
                     v-for="result in results"
                     :key="result"
@@ -19,16 +24,23 @@
                         <img :src="result.thumbnail" alt="thumbnail" />
                     </div>
                     <p>{{ result.title }}</p>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import TheAlert from '@/components/UI/TheAlert'
+
 export default {
+    components: {
+        TheAlert,
+    },
     data() {
         return {
+            addedToListEvent: false,
+            animeSelected: '',
             search: '',
             results: [],
             list: [],
@@ -66,6 +78,13 @@ export default {
         },
         addEntry(title) {
             this.$store.dispatch('addEntry', title)
+            this.results = []
+            this.addedToListEvent = true
+            this.animeSelected = title
+            setTimeout(() => {
+                this.addedToListEvent = false
+                this.animeSelected = ''
+            }, 2000)
         },
     },
 }
@@ -91,13 +110,15 @@ export default {
         overflow: auto;
         border-radius: 0 0 0.5rem 0.5rem;
     }
-    li {
+    &__result {
         &:hover {
-            background: darken(white, 10);
+            background: var(--color-primary);
+            color: white;
         }
         padding: 0.5rem;
-        color: blue;
+        color: var(--color-text-100);
         cursor: pointer;
+        font-size: 1.2rem;
         display: flex;
     }
     &__thumbnail-container {

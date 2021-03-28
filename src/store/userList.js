@@ -33,6 +33,12 @@ export default {
         },
     },
     mutations: {
+        removeDuplicates(state) {
+            // state.animeList = [...new Set(state.animeList)]
+            state.animeList = state.animeList.filter(
+                (v, i, a) => a.findIndex((t) => t.title === v.title) === i
+            )
+        },
         fetchUserList(state, userList) {
             state.animeList = userList
         },
@@ -138,7 +144,7 @@ export default {
                 title: anime.title,
                 score: 0,
                 episodes: anime.episodes,
-                episodeOn: 1,
+                episodeOn: 0,
                 coverUrl: anime.picture || anime.thumbnail,
                 type: anime.type,
             })
@@ -147,7 +153,7 @@ export default {
         },
         async updateUserList(context) {
             const userName = context.getters.userName
-
+            context.commit('removeDuplicates')
             const response = await fetch(
                 `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`,
                 {
