@@ -17,7 +17,7 @@ export default {
         watchingList(state) {
             return state.animeList.filter(
                 (anime) =>
-                    anime.episodes > anime.episodeOn && anime.episodeOn > 1
+                    anime.episodes > anime.episodeOn && anime.episodeOn >= 1
             )
         },
         completedList(state) {
