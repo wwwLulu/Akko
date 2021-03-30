@@ -18,19 +18,6 @@
             <i class="fa fa-camera" aria-hidden="true"></i>
         </div>
         <p class="user__name">{{ username }}</p>
-        <!-- <div
-            v-if="username == $store.getters.userName"
-            class="user__img-upload"
-        >
-            <input
-                type="file"
-                id="myFile"
-                name="filename"
-                accept="image/*"
-                ref="uploader"
-            />
-            <button @click="uploadAvatar">Upload</button>
-        </div> -->
     </div>
 </template>
 
@@ -90,7 +77,7 @@ export default {
         justify-content: center;
         align-items: center;
         &:hover {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
         }
         &:hover .user__avatar {
             width: 0;
@@ -100,6 +87,7 @@ export default {
             opacity: 1;
         }
         i {
+            z-index: -1;
             position: absolute;
             font-size: 3rem;
             color: white;
