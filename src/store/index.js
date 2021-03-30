@@ -175,6 +175,7 @@ const store = createStore({
             localStorage.removeItem('tokenExpiration')
             localStorage.removeItem('userName')
             localStorage.removeItem('userAvatar')
+            context.state.animeList = []
         },
         async setDatabase(context) {
             const res = await fetch('/database/db.json')
