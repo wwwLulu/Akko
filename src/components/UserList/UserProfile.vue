@@ -1,10 +1,23 @@
 <template>
-    <div class="user">
+    <div class="user" :key="componentKey">
         <div class="user__avatar-container">
-            <!-- <img :src="userImgUrl" alt="avatar" class="user__avatar" /> -->
-            <img class="user__avatar" src="https://placewaifu.com/image/200" />
+            <img :src="userImgUrl" alt="avatar" class="user__avatar" />
+            <!-- <img class="user__avatar" src="https://placewaifu.com/image/200" /> -->
         </div>
         <p class="user__name">{{ username }}</p>
+        <div
+            v-if="username == $store.getters.userName"
+            class="user__img-upload"
+        >
+            <input
+                type="file"
+                id="myFile"
+                name="filename"
+                accept="image/*"
+                ref="uploader"
+            />
+            <button @click="uploadAvatar">Upload</button>
+        </div>
     </div>
 </template>
 
@@ -15,6 +28,37 @@ export default {
         username: String,
     },
     components: {},
+    data() {
+        return {
+            componentKey: 0,
+        }
+    },
+    methods: {
+        forceUpdate() {
+            this.componentKey++
+        },
+        async uploadAvatar() {
+            let form = new FormData()
+            let formData = this.$refs.uploader
+            form.append('image', formData.files[0])
+            try {
+                let key = 'f0656cc30b4fd2e4424d16257a02b98e'
+                let url = `https://api.imgbb.com/1/upload?key=${key}`
+                const res = await fetch(url, {
+                    method: 'POST',
+                    body: form,
+                })
+                const data = await res.json()
+                let avatarUrl = data.data.url
+                this.$store.state.userAvatar = avatarUrl
+                await this.$store.dispatch('updateUserInfo')
+                this.forceUpdate()
+                location.reload()
+            } catch (e) {
+                console.log(e)
+            }
+        },
+    },
 }
 </script>
 

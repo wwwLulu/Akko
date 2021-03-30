@@ -34,7 +34,7 @@ router.beforeEach(function(to, _, next) {
     if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
         next('/auth')
     } else if (to.meta.requiresUnAuth && store.getters.isAuthenticated) {
-        next('/')
+        next(`/user/${store.getters.userName}`)
     } else {
         next()
     }
