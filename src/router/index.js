@@ -7,9 +7,10 @@ import store from '@/store/index.js'
 const routes = [
     {
         path: '/',
-        // redirect: '/user/wwwLulu',
+        redirect: `/auth`,
         name: 'Home',
         component: Home,
+        meta: { requiresAuth: true },
     },
     {
         path: '/auth',

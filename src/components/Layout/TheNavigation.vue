@@ -1,9 +1,9 @@
 <template>
     <nav class="nav">
         <SearchAnime />
-        <router-link class="nav__link" to="/">
+        <!-- <router-link class="nav__link" to="/">
             Home
-        </router-link>
+        </router-link> -->
         <router-link
             v-if="!!$store.state.token"
             class="nav__link"
