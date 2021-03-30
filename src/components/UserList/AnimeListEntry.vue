@@ -38,6 +38,9 @@
             </p>
             <p class="anime__type">{{ type }}</p>
         </div>
+        <div @click="deleteEntry" class="anime__trash">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </div>
     </div>
 </template>
 
@@ -72,6 +75,9 @@ export default {
         },
     },
     methods: {
+        deleteEntry() {
+            this.$store.dispatch('removeEntry', this.title)
+        },
         incrementEpisode() {
             if (this.$route.params.username != this.$store.getters.userName) {
                 return
@@ -100,6 +106,16 @@ export default {
     p:not(&__title) {
         width: 8rem;
         text-align: center;
+    }
+    &:hover &__trash {
+        display: inline;
+        cursor: pointer;
+    }
+    &__trash {
+        position: absolute;
+        right: 2rem;
+        color: white;
+        display: none;
     }
     &__left,
     &__right {

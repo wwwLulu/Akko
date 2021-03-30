@@ -61,6 +61,7 @@ export default {
                 }
             })
         },
+
         incrementEpisode(state, title) {
             state.animeList.forEach((anime) => {
                 if (anime.title == title && anime.episodeOn != anime.episodes) {
@@ -115,6 +116,12 @@ export default {
                 await context.dispatch('updateUserList')
             }
             context.commit('fetchUserList', userList)
+        },
+        removeEntry(context, title) {
+            context.state.animeList = context.state.animeList.filter(
+                (anime) => anime.title != title
+            )
+            context.dispatch('updateUserList')
         },
         addEntry(context, title) {
             const animeList = context.getters.animeList
