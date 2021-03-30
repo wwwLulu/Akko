@@ -1,6 +1,10 @@
 <template>
     <nav class="nav">
-        <router-link :to="`/user/${$store.getters.userName}`" class="nav__logo">
+        <router-link
+            @click="location.reload()"
+            :to="`/user/${$store.getters.userName}`"
+            class="nav__logo"
+        >
             Nipah
         </router-link>
         <SearchAnime />
