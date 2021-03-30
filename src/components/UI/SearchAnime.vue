@@ -101,7 +101,6 @@ export default {
         border: none;
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
-        width: 30rem;
         max-width: 30rem;
         border: white 1px solid;
     }
