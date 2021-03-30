@@ -34,7 +34,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .nav {
-    position: relative;
+    z-index: 6000000;
+    position: sticky;
     width: 100%;
     height: 5rem;
     background: var(--color-primary);
