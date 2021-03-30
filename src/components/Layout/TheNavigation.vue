@@ -1,6 +1,8 @@
 <template>
     <nav class="nav">
-        <p class="nav__logo">Nipah</p>
+        <router-link :to="`/user/${$store.getters.userName}`" class="nav__logo">
+            Nipah
+        </router-link>
         <SearchAnime />
         <!-- <router-link
             v-if="!!$store.state.token"
@@ -48,6 +50,7 @@ export default {
         margin-right: 2rem;
     }
     &__logo {
+        cursor: pointer;
         font-family: 'Fredoka One', cursive;
         position: absolute;
         left: 2rem;

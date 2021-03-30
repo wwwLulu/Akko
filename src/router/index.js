@@ -24,6 +24,7 @@ const routes = [
         component: UserList,
         props: true,
     },
+    { path: '/:notFound(.*)', redirect: `/user/${store.state.userName}` },
 ]
 
 const router = createRouter({
