@@ -58,7 +58,6 @@ export default {
     async mounted() {
         await this.$store.dispatch('getUserInfo', this.username)
         await this.$store.dispatch('getUserList', this.username)
-        this.$store.commit('sortUserList', this.sortMethod)
         this.finishedLoading = true
     },
     updated() {},

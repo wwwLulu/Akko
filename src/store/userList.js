@@ -67,11 +67,20 @@ export default {
                 }
             })
         },
+
         sortUserList(state, method) {
             if (method == 'score') {
                 state.animeList.sort((a, b) => b.score - a.score)
             } else {
-                state.animeList.sort((a, b) => a.title > b.title)
+                let sortedList = []
+                let titles = state.animeList.map((anime) => anime.title)
+                titles.sort()
+                titles.forEach((title) => {
+                    sortedList.push(
+                        state.animeList.find((anime) => anime.title == title)
+                    )
+                })
+                state.animeList = sortedList
             }
         },
     },
@@ -81,11 +90,7 @@ export default {
                 `https://anime-list-e4360-default-rtdb.firebaseio.com/userlist/${userName}.json`
             )
             const userListObj = await res.json()
-            // if (!!userListObj == false) {
-            //     await context.dispatch('updateUserList')
-            // }
             let userList = []
-
             for (const key in userListObj) {
                 const animeEntry = {
                     title: userListObj[key].title,
