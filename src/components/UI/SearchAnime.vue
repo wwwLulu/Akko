@@ -10,6 +10,11 @@
             placeholder="Search anime to add"
             v-model="search"
         />
+        <div
+            v-if="search.length > 3"
+            @click="search = ''"
+            class="overlay"
+        ></div>
         <div v-if="results.length != 0" class="search__results">
             <p>Click to add to list</p>
             <br />
@@ -107,22 +112,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 .search {
     z-index: 500000;
     margin-right: 2rem;
-
+    p {
+        color: var(--color-text-100);
+    }
     &__input {
         font-size: 1.4rem;
         border: none;
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
         max-width: 30rem;
-        border: white 1px solid;
+        border: 1px solid var(--color-list-background);
     }
     &__results {
         position: absolute;
         top: 5rem;
-        background: white;
+        background: var(--color-list-background);
         padding: 0.5rem;
         max-height: 30rem;
         overflow: auto;
