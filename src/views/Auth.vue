@@ -16,6 +16,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+    max-width: 1925px;
     position: absolute;
     width: 100%;
     height: 100%;
