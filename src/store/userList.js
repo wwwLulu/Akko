@@ -74,18 +74,6 @@ export default {
                 state.animeList.sort((a, b) => a.title > b.title)
             }
         },
-        sortByTitleAZ(state) {
-            state.animeList.sort((a, b) => a.title > b.title)
-        },
-        sortByTitleZA(state) {
-            state.animeList.sort((a, b) => a.title < b.title)
-        },
-        sortByScoreAsc(state) {
-            state.animeList.sort((a, b) => a.score - b.score)
-        },
-        sortByScoreDesc(state) {
-            state.animeList.sort((a, b) => b.score - a.score)
-        },
     },
     actions: {
         async getUserList(context, userName = context.rootGetters.userName) {

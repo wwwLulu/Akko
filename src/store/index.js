@@ -117,7 +117,6 @@ const store = createStore({
                 console.log('Could not fetch data from db')
             }
             const data = await res.json()
-            console.log(data)
             for (const key in data) {
                 if (!!data[key].userName == false) {
                     continue
