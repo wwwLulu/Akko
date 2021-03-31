@@ -73,6 +73,18 @@ export default {
                         thumbnail: anime.thumbnail,
                     })
                 }
+                for (const synonym of anime.synonyms) {
+                    if (
+                        synonym
+                            .toLowerCase()
+                            .indexOf(this.search.toLowerCase()) > -1
+                    ) {
+                        results.push({
+                            title: synonym,
+                            thumbnail: anime.thumbnail,
+                        })
+                    }
+                }
             })
             this.results = results
         },

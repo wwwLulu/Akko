@@ -1,5 +1,4 @@
 export default {
-    // namespaced: true,
     state() {
         return {
             userListAvatar: null,
@@ -110,10 +109,6 @@ export default {
                 }
                 userList.push(animeEntry)
             }
-            // if (userList.length == 0) {
-            //     userList = []
-            //     await context.dispatch('updateUserList')
-            // }
             context.commit('fetchUserList', userList)
         },
         removeEntry(context, title) {
