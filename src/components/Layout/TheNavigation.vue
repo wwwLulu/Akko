@@ -51,7 +51,7 @@ export default {
         setDarkMode() {
             let root = document.documentElement
             root.style.setProperty('--color-primary', ' #5349c0')
-            root.style.setProperty('--color-background', '#474747')
+            root.style.setProperty('--color-background', '#08001A')
             root.style.setProperty('--color-list-background', 'rgb(34, 34, 34)')
             root.style.setProperty(
                 '--color-text-100',

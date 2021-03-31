@@ -122,6 +122,7 @@ export default {
     z-index: 20000;
     position: fixed;
     background: rgba(0, 0, 0, 0.6);
+    color: var(--color-text-100);
     top: 0;
     right: 0;
     left: 0;
@@ -175,7 +176,7 @@ export default {
         z-index: 30000;
         display: flex;
         justify-content: center;
-        background: #f3f3f3;
+        background: var(--color-list-background);
         border-radius: 1rem;
         font-size: 1.4rem;
         max-width: 50rem;
