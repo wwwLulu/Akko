@@ -54,4 +54,62 @@ body {
     min-height: 100vh;
     font-family: 'Lato', sans-serif;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fall-bound {
+    0% {
+        transform: translateY(-200%) scaleX(1) scaleY(1);
+        opacity: 0;
+    }
+    40% {
+        transform: translateY(0%) scaleX(1.6) scaleY(0.8);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-6%) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    60% {
+        transform: translateY(0%) scaleX(1.3) scaleY(0.9);
+        opacity: 1;
+    }
+    70% {
+        transform: translateY(-3%) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(0%) scaleX(1.15) scaleY(0.95);
+        opacity: 1;
+    }
+    90% {
+        transform: translateY(-1.5%) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0%) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-from-left {
+    0% {
+        transform: translateX(-100%);
+    }
+    80% {
+        transform: translateX(30%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
 </style>

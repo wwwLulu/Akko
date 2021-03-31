@@ -37,7 +37,7 @@ export default {
         SearchAnime,
     },
     mounted() {
-        if (this.$store.state.darkMode) {
+        if (localStorage.getItem('darkMode') == 'true') {
             this.setDarkMode()
         } else {
             this.setLightMode()
@@ -86,6 +86,8 @@ export default {
         margin-right: 2rem;
     }
     &__logo {
+        animation: fadeIn linear 0.5s forwards,
+            slide-in-from-left ease-in-out 0.5s forwards;
         cursor: pointer;
         font-family: 'Fredoka One', cursive;
         position: absolute;
@@ -103,6 +105,7 @@ export default {
         text-decoration: none;
     }
     &__logout {
+        animation: fadeIn linear 0.5s forwards;
         cursor: pointer;
         border: none;
         background: transparent;
@@ -117,6 +120,7 @@ export default {
         }
     }
     &__search {
+        animation: fadeIn linear 0.5s forwards;
         font-size: 1.4rem;
         border: none;
         border-radius: 0.5rem;
@@ -125,6 +129,7 @@ export default {
         left: 2rem;
     }
     &__dark-mode {
+        animation: fadeIn linear 0.5s forwards;
         cursor: pointer;
         display: flex;
         justify-content: center;

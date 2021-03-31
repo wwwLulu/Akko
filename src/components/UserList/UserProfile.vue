@@ -69,6 +69,7 @@ export default {
         }
     }
     &__avatar-container {
+        animation: fall-bound 1s cubic-bezier(0.94, 0.01, 1, 1) 0s forwards;
         position: relative;
         width: 12.5rem;
         height: 12.5rem;
@@ -102,6 +103,7 @@ export default {
         object-position: center;
     }
     &__name {
+        animation: slide-in-from-left ease-in-out 0.6s forwards;
         margin: 1rem;
         color: var(--color-text-100);
         font-size: 1.8rem;

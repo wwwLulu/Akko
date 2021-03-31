@@ -98,7 +98,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     color: var(--color-text-100);
-
+    transition: all 0.3s;
     &:hover {
         background: var(--color-primary);
         color: white;

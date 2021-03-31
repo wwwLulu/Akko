@@ -53,6 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+    animation: fadeIn linear 0.5s forwards;
     flex-direction: column;
     font-size: 1.4rem;
     border-radius: 0.5rem;

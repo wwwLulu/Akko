@@ -172,6 +172,7 @@ export default {
         margin-left: 1rem;
     }
     &__info {
+        animation: fadeIn 0.4s ease-out forwards;
         padding: 1rem;
         z-index: 30000;
         display: flex;
