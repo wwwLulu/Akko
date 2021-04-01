@@ -80,6 +80,7 @@ export default {
         background: rgba(0, 0, 0, 0.6);
     }
     &__info {
+        animation: fadeIn 0.4s ease-out forwards;
         z-index: 20000;
         padding: 1rem;
         background: var(--color-list-background);
