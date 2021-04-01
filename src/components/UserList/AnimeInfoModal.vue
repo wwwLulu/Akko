@@ -106,6 +106,7 @@ export default {
         margin-bottom: 0.5rem;
         padding: 0.5rem;
         background: var(--color-primary);
+        color: white;
     }
 }
 </style>
