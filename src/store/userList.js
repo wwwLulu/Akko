@@ -126,6 +126,10 @@ export default {
             context.dispatch('updateUserList')
         },
         async updateUserList(context) {
+            if (this.$route.params.username != context.getters.userName) {
+                return
+            }
+
             const userName = context.getters.userName
             context.commit('removeDuplicates')
             const response = await fetch(
