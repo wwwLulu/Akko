@@ -68,7 +68,7 @@ export default {
     methods: {
         async fetchAnime() {
             let results = []
-            this.list.forEach((anime) => {
+            for (const anime of this.list) {
                 if (
                     anime.title
                         .toLowerCase()
@@ -79,6 +79,7 @@ export default {
                         title: anime.title,
                         thumbnail: anime.thumbnail,
                     })
+                    break
                 }
                 for (const synonym of anime.synonyms) {
                     if (
@@ -91,9 +92,10 @@ export default {
                             title: synonym,
                             thumbnail: anime.thumbnail,
                         })
+                        break
                     }
                 }
-            })
+            }
             this.results = results
         },
         addEntry(title) {
