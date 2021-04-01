@@ -10,6 +10,17 @@
             :type="type"
         />
     </teleport>
+    <teleport to="#app">
+        <AnimeInfoModal
+            v-if="infoMode"
+            @closeModal="infoMode = false"
+            :coverUrl="coverUrl"
+            :title="title"
+            :averageScore="animeInfo.averageScore"
+            :type="type"
+            :genres="animeInfo.genres"
+        />
+    </teleport>
     <div class="anime">
         <div class="anime__left">
             <div class="anime__cover-container">
@@ -22,6 +33,7 @@
             <div class="anime__cover-container--hovering">
                 <img :src="coverUrl" alt="cover" class="anime__cover--big" />
             </div>
+            <i @click="displayInfo" class="anime__info fa fa-info"></i>
             <p class="anime__title">{{ title }}</p>
         </div>
         <div class="anime__right">
@@ -46,6 +58,7 @@
 
 <script>
 import AnimeEditModal from '@/components/UserList/AnimeEditModal'
+import AnimeInfoModal from '@/components/UserList/AnimeInfoModal'
 
 export default {
     props: {
@@ -56,11 +69,14 @@ export default {
         type: String,
     },
     components: {
+        AnimeInfoModal,
         AnimeEditModal,
     },
     data() {
         return {
             editMode: false,
+            infoMode: false,
+            animeInfo: {},
         }
     },
     computed: {
@@ -75,6 +91,47 @@ export default {
         },
     },
     methods: {
+        async displayInfo() {
+            this.infoMode = true
+            let animeEntry = this.$store.getters.db.find((anime) => {
+                return anime.title == this.title
+            })
+            let anilistEntry = animeEntry.sources.find((anime) => {
+                return anime.includes('anilist')
+            })
+            let anilistId = +anilistEntry.slice(
+                anilistEntry.lastIndexOf('/') + 1
+            )
+
+            const url = 'https://graphql.anilist.co'
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify({
+                    query: `
+                    query ($id: Int) { 
+                        Media (id: $id, type: ANIME) { 
+                            genres
+                            averageScore
+                        }
+                    }
+                    `,
+                    variables: { id: anilistId },
+                }),
+            }
+            const res = await fetch(url, options)
+            const data = await res.json()
+            let animeInfo = {
+                title: this.title,
+                coverUrl: this.coverUrl,
+                ...data.data.Media,
+            }
+            this.animeInfo = animeInfo
+            console.log(this.animeInfo)
+        },
         deleteEntry() {
             this.$store.dispatch('removeEntry', this.title)
         },
@@ -111,6 +168,15 @@ export default {
     &:hover &__trash {
         display: inline;
         cursor: pointer;
+    }
+    &__info {
+        display: none;
+        cursor: pointer;
+        margin-left: 1rem;
+    }
+    &:hover &__info {
+        display: block;
+        color: white;
     }
     &__trash {
         position: absolute;
