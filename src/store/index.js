@@ -183,7 +183,12 @@ const store = createStore({
         async setDatabase(context) {
             const res = await fetch('/database/db.json')
             const list = await res.json()
-            context.state.database = list.data
+            const db = list.data.filter(
+                (anime) =>
+                    anime.type.toLowerCase() == 'tv' ||
+                    anime.type.toLowerCase() == 'movie'
+            )
+            context.state.database = db
         },
     },
     mutations: {
