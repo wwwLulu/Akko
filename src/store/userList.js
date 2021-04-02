@@ -126,15 +126,14 @@ export default {
             context.dispatch('updateUserList')
         },
         async updateUserList(context) {
-            // if (
-            //     window.location.href.toLowerCase() !=
-            //     `https://nippah.com/user/${context.getters.userName.toLowerCase()}`
-            // )
-
             if (
                 window.location.href.toLowerCase() !=
-                `http://localhost:8080/user/${context.getters.userName.toLowerCase()}`
+                `https://nippah.com/user/${context.getters.userName.toLowerCase()}`
             ) {
+                // if (
+                //     window.location.href.toLowerCase() !=
+                //     `http://localhost:8080/user/${context.getters.userName.toLowerCase()}`
+                // ) {
                 console.error('unable to alter this data')
                 return
             }
