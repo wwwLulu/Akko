@@ -11,6 +11,7 @@
         />
         <section class="lists col-8">
             <h2
+                class="lists__empty"
                 v-if="
                     watchingList.length == 0 &&
                         completedList.length == 0 &&
@@ -79,6 +80,7 @@ export default {
 h2 {
     margin-top: 5rem;
     font-size: 2rem;
+    color: var(--color-primary);
 }
 .row {
     display: flex;
