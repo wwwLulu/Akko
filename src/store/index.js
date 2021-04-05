@@ -57,6 +57,7 @@ const store = createStore({
                 const error = new Error(
                     data.message || 'Failed to authenticate.'
                 )
+                alert('Your password or email is incorrect')
                 throw error
             }
             const res2 = await fetch(
